@@ -1,0 +1,87 @@
+1 - O Usuário pode digitar palavras de até 5 casas
+2 - O Usuário tem apenas 6 tentativas
+3 - O Jogo deverá ser multiplayer local (max 2 jogadores).
+4 - O Desenvolvedor terá que obter o texto escrito pelo usuário,
+verificar se ele tem 5 casas maxima (length = 5) e separar as casas.
+5 - será o Usuário que adicionará a lista de palavras possíveis para
+serem adivinhadas.
+6 - somente palavras com 5 letras (length = 5) são válidas para a lista
+7 - O Jogo deverá obter a quantidade de rodadas que serão jogadas
+8 - as letras que estiverem na casa correta (existem na palavra e estão
+no lugar certo) deverão aparecer na cor verde, as que existem mas não
+estão na casa correta deverão aparecer na cor vermelha
+9 - cada rodada vale 120 pontos
+10 - cada rodada um jogador diferente joga
+11 - não ganhar a rodada = -120 pontos
+
+
+
+TERMO: 
+
+RODADA: 1     TENTATIVA: 1     JOGADOR: JOGADOR_X
+
+[] [] [] [] []
+
+
+INSIRA A PALAVRA (MAX 5 LETRAS): JOGAR
+
+
+
+
+TERMO: 
+
+RODADA: 1     TENTATIVA: 2     JOGADOR: JOGADOR_X
+
+[J] [O] [G] [A] [R]
+[ ] [ ] [ ] [ ] [ ]
+
+
+INSIRA A PALAVRA (MAX 5 LETRAS): BAIXO
+
+
+TERMO: 
+
+RODADA: 1     TENTATIVA: 3     JOGADOR: JOGADOR_X
+
+[J] [O] [G] [A] [R]
+[B] [A] [I] [X] [O]
+[ ] [ ] [ ] [ ] [ ]
+
+INSIRA A PALAVRA (MAX 5 LETRAS): 
+
+
+
+
+- - - - - - - - - - - - - - - - - - - - - -
+| TERMO:                                  |
+| DESENVOLVIDO POR: Felipe Gabriel        |
+|                                         | 
+| SELECIONE UMA DAS OPÇÕES:               |
+| 1 - Novo Jogo                           |
+| 2 - Score                               | 
+| 3 - Sair                                | 
+- - - - - - - - - - - - - - - - - - - - - -
+
+
+// Caso Opção 1:
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+| TERMO:                                     NOVO JOGO: |
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+ADICIONE O NOME DO JOGADOR 1: Felipe
+ADICIONE O NOME DO JOGADOR 2: Italo
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+| TERMO:                                     NOVO JOGO: |
+|                                                       |
+| ADICIONE UM TEXTO QUALQER E O TERMO IRÁ VERIFICAR     |
+| CRIARA UMA LISTA DE PALAVRAS PARA O JOGO:             |
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+| TERMO:                                     NOVO JOGO: |
+|                                                       |
+| INFORME A QUANTIDADE DE RODADAS PARA ESTE NOVO JOGO   |
+| MAX: 19                                               |
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - -
