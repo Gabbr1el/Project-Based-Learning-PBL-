@@ -58,7 +58,7 @@ INSIRA A PALAVRA (MAX 5 LETRAS):
 |                                         | 
 | SELECIONE UMA DAS OPÇÕES:               |
 | 1 - Novo Jogo                           |
-| 2 - Score                               | 
+| 2 - Como jogar                               | 
 | 3 - Sair                                | 
 - - - - - - - - - - - - - - - - - - - - - -
 
@@ -83,5 +83,5 @@ ADICIONE O NOME DO JOGADOR 2: Italo
 | TERMO:                                     NOVO JOGO: |
 |                                                       |
 | INFORME A QUANTIDADE DE RODADAS PARA ESTE NOVO JOGO   |
-| MAX: 19                                               |
+| MAX: x                                               |
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
