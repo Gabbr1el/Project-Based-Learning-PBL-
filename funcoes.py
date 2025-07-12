@@ -1,13 +1,14 @@
 import random
+import sys
 
 player1 = ''
 player2 = ''
 
-player_1_pontuation = 0
-player_2_pontuation = 0
+player_1_score = 0
+player_2_score = 0
 
 text = []
-option = -1
+option = ''
 termlist = []
 round_size = -1
 
@@ -21,6 +22,7 @@ atual_points = []
 
 MAX_TERMO_WORD_LENGTH = 5
 COLOR_RED = '\033[31m'
+COLOR_YELLOW = '\033[33m'
 COLOR_GREEN = '\033[32m'
 COLOR_RESET = '\033[0m'
 COLOR_CIAN = '\033[36m'
@@ -30,7 +32,7 @@ def main():
 
 def start():
     global option
-    while option != '1' and option != '2':
+    while option != '1' and option != '2' and option != '3':
         TelaGame()
         option = str(input('INSIRA SUA OPÇÃO: '))
         print('\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n')
@@ -41,6 +43,8 @@ def start():
     if option == '1':
         TelaGame1()
     elif option == '2':
+        ComoJogar()
+    elif option == '3':
         finish()
 
 def TelaGame():
@@ -51,7 +55,8 @@ def TelaGame():
     print('| Selecione:                           |')
     print('|                                      |')
     print(f'|{COLOR_GREEN} 1 - NOVO JOGO                        {COLOR_RESET}|')
-    print(f'|{COLOR_RED} 2 - SAIR                             {COLOR_RESET}|')
+    print(f'|{COLOR_CIAN} 2 - COMO JOGAR?                      {COLOR_RESET}|')
+    print(f'|{COLOR_RED} 3 - SAIR                             {COLOR_RESET}|')
     print('----------------------------------------\n')
 
 def GameEspecification():
@@ -83,18 +88,19 @@ def TelaGame1():
       print('')
       player2 = str(input('ADICIONE O NOME DO JOGADOR 2: '))    
       print('\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n')   
-      if player1 != '' or player2 != '' or player1 != player2:
-          break
+      
+        
       
     GameEspecification()
-    text = str(input('DIGITE ALGUM TEXTO ALEATÓRIO PARA O DICIONÁRIO: ')).upper()
+    text = str(input('DIGITE ALGUM TEXTO ALEATÓRIO PARA O DICIONÁRIO (Obs: as palavras devem conter 5 letras, e pode ser espaçada do jeito que você quiser): ')).upper()
     while text == '' or len(text)< 5:
         print(f'{COLOR_RED}OPÇÃO SELECIONADA É INVÁLIDA, DIGITE NOVAMENTE. {COLOR_RESET}')
         text = str(input('\n\nDIGITE ALGUM TEXTO ALEATÓRIO AO DICIONÁRIO: ')).upper()
         if text != '' and len(text) > 5:
           break
     filter(text)
-
+    
+    
     while True:
         print(f'\nValor Máximo: {len(termlist)}')
         rounds_totality = int(input("Defina a quantidade de rodadas: "))
@@ -107,6 +113,19 @@ def TelaGame1():
     print('\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n')
     TelaGame2()
 
+def ComoJogar():
+    print('----------------------------------------------------------------')
+    print(f'| {COLOR_GREEN}[x] - A Letra existe na palavra e está no local certo{COLOR_RESET}        |')
+    print(f'| {COLOR_RED}[x] - A letra não existe na palavra!{COLOR_RESET}                         |')
+    print(f'| {COLOR_YELLOW}[x] - A letra existe na palavra, porém está no espaço errado{COLOR_RESET} |')
+    print('|                                                              |')    
+    print('| Clique [Y] para sair                                         |')
+    print('----------------------------------------------------------------\n')
+    sair = input("sair: ").strip().upper()
+    if sair == "Y":
+        reload()
+    else:
+        print(f"{COLOR_RED}Você digitou algo errado! Digite [Y] para sair.{COLOR_RESET}")
 
 def TelaGame2():
     user_words = []
@@ -115,49 +134,61 @@ def TelaGame2():
     global atual_rounds
     global tentative
     global rounds_totality
-    global player_1_pontuation
+    global player_1_score
+    global player_2_score
+
+    def checagem5letras():
+        if len(palavra) < 5:
+            print("Erro, sua palavra tem menos de 5 letras!")
+            TelaGame2()
+        elif len(palavra) > 5:
+            print("Erro, sua palavra tem mais de 5 letras!")
+            TelaGame2()
     for round in range(1, rounds_totality + 1):
         pontuation = 120
-        round_index = getRandomicDictionaryInt(len(termlist))  #index gerado randomicamente
+        round_index = random.randint(0, len(termlist) - 1)  #index gerado randomicamente
         for tentative in range(1,7):
-            print('----------------------------------------------------------------------------------------------------------------------------')
+            print('-------------------------------------------------------------------------------------------------------------------------------------------------------------')
             print('GAME: TERMO                                      ')
             print('')
             print(f'Rodada: {atual_rounds}         Rodadas Totais: {rounds_totality}         Tentativa: {tentative}         jogador: {player1 if round % 2 != 0 else player2}')
-            print('')
-            print('')
             showTermoWordList(user_words, termlist[round_index])
-            user_words.append(input(str('Adicione uma palavra: ')).upper())
-            print('[ ] [ ] [ ] [ ] [ ]\n')
+            print('[ ] [ ] [ ] [ ] [ ]')
+            print('-------------------------------------------------------------------------------------------------------------------------------------------------------------')
+            palavra = (input(str('Adicione uma palavra: ')).upper())
+            checagem5letras()
+            user_words.append(palavra)
             print('\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n')
 
-            if user_words != termlist[round_index]:
+            
+            if user_words[-1] != termlist[round_index]:
                 pontuation -= 20
             else:
                 if round % 2 !=0:
-                    player_2_pontuation += pontuation
+                    player_1_score += pontuation
                 else:
-                    player_1_pontuation += pontuation
+                    player_2_score += pontuation
 
                 print(f'\n\n{COLOR_GREEN}Parabéns voce conseguiu !{COLOR_RESET}')
-                user_words = []
-                break
+                user_words = []  
 
             if pontuation == 0:
                 print(f'\n\n {COLOR_RED}Ops! parece que voce perdeu!{COLOR_RESET}')
                 user_words = []
-                break
-        removeDictionaryItem(termlist[round_index])
-    print(f'jogador: {player1} pontuação: {player_1_pontuation}')
-    print(f'jogador: {player2} pontuação: {player_2_pontuation}')
-
+   
+        termlist.pop(round_index)
+    print(f'jogador: {player1} pontuação: {player_1_score}')
+    print(f'jogador: {player2} pontuação: {player_2_score}') 
 
 def showTermoWordList (text, termo_word):
     global COLOR_GREEN
     global COLOR_RED
     global COLOR_RESET
+    global COLOR_YELLOW
+
 
     for user_word in text:
+
         word_to_show = ''
         user_word_letter_list = list(str(user_word))
         termo_word_letter_list = list(str(termo_word))
@@ -175,7 +206,7 @@ def showTermoWordList (text, termo_word):
             if is_letter:
                 word_to_show += f'[{COLOR_GREEN}{user_word_letter_list[index]}{COLOR_RESET}] '
             elif contains_letter:
-                word_to_show += f'[{COLOR_RED}{user_word_letter_list[index]}{COLOR_RESET}] '
+                word_to_show += f'[{COLOR_YELLOW}{user_word_letter_list[index]}{COLOR_RESET}] '
             else:
                 word_to_show += f'[{user_word_letter_list[index]}] '
         print(f'{word_to_show}{COLOR_RESET}')
@@ -192,26 +223,14 @@ def filter(text):
               termlist.append(words.replace(',', '').replace('.', '').replace('!', '').replace('@', '').replace('(', '').replace(')', '').replace('?', ''))
   print('\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n')
 
-def rounds():
-    global tentative
-    global atual_rounds
-
-    if tentative == 6:
-        atual_rounds+=1
-
-def tentatives():
-    global tentative
-
-    while True:
-        tentative+= 1
-        break
-    if tentative > 6:  
-        tentative == 0
-
 def finish():
-    print('\033[32mMUITO OBRIGADO POR JOGAR!!! \n\n\n\n\n\n\n\033[0;0m')
-    StopIteration
+    print("\n\n\n\n\n\n\n")
+    print(f'{COLOR_GREEN}MUITO OBRIGADO POR JOGAR!!! \n\n\n\n\n\n\n{COLOR_RESET}')
+    
+    sys.exit()
 
 def reload():
-    start()
-
+    print("\n\n\n\n\n\n\n")
+    print(f'{COLOR_RED}Saindo... \n\n\n\n\n\n\n{COLOR_RESET}')
+    
+    sys.exit()
