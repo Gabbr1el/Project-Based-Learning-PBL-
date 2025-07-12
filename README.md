@@ -1,3 +1,3 @@
-# Project **PBL**
+// Project **PBL**
 
-this is a **PBL** made for an evaluation semi-annual of an extension project provided by the state university of Feira de Santana, in this evaluation I will replicate the game "Term" without using a platform.
+This is a **PBL** project designed for a semester-long evaluation of an extension program offered by the State University of Feira de Santana. In this evaluation, I will replicate the game "Termo" without relying on any platform, using Python and matrix concepts.
